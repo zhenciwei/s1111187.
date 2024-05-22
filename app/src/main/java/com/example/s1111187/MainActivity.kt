@@ -25,6 +25,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.s1111187.ui.theme.S1111187Theme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+
+import androidx.compose.foundation.layout.Column
+
+import androidx.compose.material3.Button
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 
@@ -39,15 +50,18 @@ class MainActivity : ComponentActivity() {
                     //Main()
                     FirstScreen()
 
+
                 }
             }
         }
     }
+
 }
 
 @Composable
 fun FirstScreen() {
     val context = LocalContext.current
+    var appear by remember { mutableStateOf(true) }
 
     Column(modifier = Modifier) {
         Image(
@@ -59,17 +73,20 @@ fun FirstScreen() {
             text = "簡介",
             color = Color.Blue
         )
-        
-        Image(painter = painterResource(id = R.drawable.service),
+
+        Image(painter = if(appear) painterResource(id = R.drawable.service) else painterResource(id = R.drawable.aurthor),
             contentDescription = "service")
 
-        Button(onClick = {
-            var it = Intent(context, SecondActivity::class.java)
-            context.startActivity(it)
-        })
+        Button(
+            onClick = { appear = !appear
+            })
+
         {
-            Text(text = "資管系王英禎")
+            if (appear) Text(text = "資管系王英禎")
+            else Text(text = "服務總覽")
+
         }
 
     }
 }
+
