@@ -80,6 +80,7 @@ fun SecondScreen(navController: NavController)  {
         Text(text = "長按以下圖片，可以觀看愛心家園地圖",color = Color.Blue)
         Image(painter = painterResource(id = R.drawable.lovehome), contentDescription = "lovehome")
 
+
     }
 }
 
